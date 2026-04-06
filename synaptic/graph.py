@@ -119,7 +119,16 @@ def render_svg(G: nx.DiGraph, output: Path) -> Path:
         dot.edge(src, tgt, **attrs)
 
     out = output.with_suffix("")
-    dot.render(str(out), format="svg", cleanup=True)
+    try:
+        dot.render(str(out), format="svg", cleanup=True)
+    except Exception as exc:
+        if "ExecutableNotFound" in type(exc).__name__ or "dot" in str(exc).lower():
+            raise RuntimeError(
+                "Graphviz binary not found. Install it with:\n"
+                "  sudo apt install graphviz   # Debian/Ubuntu/WSL\n"
+                "  brew install graphviz       # macOS"
+            ) from exc
+        raise
     return output
 
 
