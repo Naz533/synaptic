@@ -157,5 +157,58 @@ def scan(
     )
 
 
+@app.command()
+def tui(
+    project: Path = typer.Argument(
+        ...,
+        help="Root path of the Python project to analyse.",
+        exists=True,
+        file_okay=False,
+        dir_okay=True,
+        resolve_path=True,
+    ),
+    cloud: bool = typer.Option(True,  "--cloud/--no-cloud",  help="Detect AWS / GCP / Azure SDK usage."),
+    http:  bool = typer.Option(True,  "--http/--no-http",    help="Detect HTTP client library usage."),
+    tests: bool = typer.Option(False, "--tests/--no-tests",  help="Include test files in the scan."),
+    filter_stdlib:   bool = typer.Option(True,  "--filter-stdlib/--no-filter-stdlib",     help="Exclude stdlib modules from the graph."),
+    filter_external: bool = typer.Option(False, "--filter-external/--no-filter-external", help="Exclude third-party modules."),
+    circular: bool = typer.Option(True, "--circular/--no-circular", help="Highlight circular dependencies."),
+) -> None:
+    """Launch the interactive TUI graph explorer for *PROJECT*."""
+    from synaptic.scanner import scan as do_scan
+    from synaptic.parser import parse_project
+    from synaptic.cloud_detector import detect as detect_cloud
+    from synaptic.http_detector import detect as detect_http
+    from synaptic.graph import build
+    from synaptic.utils import get_stdlib_modules, resolve_internal_modules
+    from synaptic.tui import launch
+
+    with console.status("[cyan]Building graph…[/]"):
+        files = do_scan(project, include_tests=tests)
+        if not files:
+            console.print("[yellow]No Python files found.[/]")
+            raise typer.Exit(1)
+
+        edges = parse_project(files, project)
+        cloud_deps = detect_cloud(edges) if cloud else []
+        http_deps = detect_http(edges) if http else []
+
+        internal_modules = resolve_internal_modules(files, project)
+        stdlib_modules = get_stdlib_modules()
+
+        G = build(
+            edges=edges,
+            cloud_deps=cloud_deps,
+            http_deps=http_deps,
+            internal_modules=internal_modules,
+            stdlib_modules=stdlib_modules,
+            filter_stdlib=filter_stdlib,
+            filter_external=filter_external,
+            highlight_circular=circular,
+        )
+
+    launch(G, project)
+
+
 if __name__ == "__main__":
     app()
