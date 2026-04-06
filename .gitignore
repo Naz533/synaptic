@@ -1,0 +1,12 @@
+lib/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.env
+*.html
+*.svg
+!assets/demo.svg

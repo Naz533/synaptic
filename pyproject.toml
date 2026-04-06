@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "synaptic"
+version = "0.1.0"
+description = "Visualize the dependency graph of any Python project — internal imports, cloud SDKs and HTTP calls."
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["dependencies", "graph", "architecture", "visualization", "ast"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "typer>=0.12",
+    "rich>=13",
+    "graphviz>=0.20",
+    "pyvis>=0.3",
+    "networkx>=3.2",
+]
+
+[project.scripts]
+synaptic = "synaptic.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["synaptic"]
