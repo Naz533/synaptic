@@ -114,10 +114,10 @@ MIT © 2024 — see [LICENSE](LICENSE) for details.
 
 ## Star History
 
-<a href="https://www.star-history.com/?repos=Darkvus%2Fsynaptic&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=Darkvus%2Fsynaptic&type=timeline&logscale=&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Darkvus/synaptic&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Darkvus/synaptic&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Darkvus/synaptic&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Darkvus/synaptic&type=timeline&theme=dark&logscale&legend=bottom-right" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Darkvus/synaptic&type=timeline&logscale&legend=bottom-right" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Darkvus/synaptic&type=timeline&logscale&legend=bottom-right" />
  </picture>
 </a>
